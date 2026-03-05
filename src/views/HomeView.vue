@@ -149,6 +149,103 @@ async function copyKey() {
         </el-input>
       </div>
     </div>
+
+    <!-- 配置说明 -->
+    <el-row :gutter="24" class="config-docs">
+      <!-- Client 配置说明 -->
+      <el-col :span="12">
+        <div class="product-card">
+          <h2 class="card-title">客户端配置说明</h2>
+          <p class="card-desc">
+            配置文件路径：<code>application.yml</code>，根节点为 <code>application.setting.proxy-client</code>
+          </p>
+          <div class="config-example">
+            <pre><code>application:
+  setting:
+    proxy-client:
+      license: "your-license-key"
+      instance-list:
+        - bind-host: "0.0.0.0"
+          bind-port: 1080
+          server-host: "192.168.1.100"
+          server-port: 8080
+          protocol: "tcp"
+          security: "Base64-AES-Key"</code></pre>
+          </div>
+          <el-descriptions :column="1" border>
+            <el-descriptions-item label="license">
+              证书
+            </el-descriptions-item>
+            <el-descriptions-item label="instance-list">
+              监听实例列表，可配置多个代理实例
+            </el-descriptions-item>
+            <el-descriptions-item label="bind-host">
+              绑定地址，客户端监听的本地地址
+            </el-descriptions-item>
+            <el-descriptions-item label="bind-port">
+              绑定端口号，客户端监听的本地端口
+            </el-descriptions-item>
+            <el-descriptions-item label="server-host">
+              转发消息目标地址，代理流量转发的目标服务器 IP 或域名
+            </el-descriptions-item>
+            <el-descriptions-item label="server-port">
+              转发消息目标端口号
+            </el-descriptions-item>
+            <el-descriptions-item label="protocol">
+              协议类型，可选 <code>tcp</code> 或 <code>udp</code>
+            </el-descriptions-item>
+            <el-descriptions-item label="security">
+              加密密钥（可选）。如果填写，则 <code>server-host</code> 和 <code>server-port</code> 必须为 Proxy Anything Server 的监听地址
+            </el-descriptions-item>
+          </el-descriptions>
+        </div>
+      </el-col>
+
+      <!-- Server 配置说明 -->
+      <el-col :span="12">
+        <div class="product-card">
+          <h2 class="card-title">服务端配置说明</h2>
+          <p class="card-desc">
+            配置文件路径：<code>application.yml</code>，根节点为 <code>application.setting.proxy-server</code>
+          </p>
+          <div class="config-example">
+            <pre><code>application:
+  setting:
+    proxy-server:
+      instance-list:
+        - bind-host: "0.0.0.0"
+          bind-port: 8080
+          server-host: "10.0.0.1"
+          server-port: 3306
+          protocol: "tcp"
+          security: "Base64-AES-Key"</code></pre>
+          </div>
+          <el-descriptions :column="1" border>
+            <el-descriptions-item label="instance-list">
+              监听实例列表，可配置多个代理实例
+            </el-descriptions-item>
+            <el-descriptions-item label="bind-host">
+              绑定地址，服务端监听的本地地址
+            </el-descriptions-item>
+            <el-descriptions-item label="bind-port">
+              绑定端口号，服务端监听的本地端口
+            </el-descriptions-item>
+            <el-descriptions-item label="server-host">
+              转发消息目标地址，解密后将流量转发到的实际目标服务器 IP 或域名
+            </el-descriptions-item>
+            <el-descriptions-item label="server-port">
+              转发消息目标端口号
+            </el-descriptions-item>
+            <el-descriptions-item label="protocol">
+              协议类型，可选 <code>tcp</code> 或 <code>udp</code>
+            </el-descriptions-item>
+            <el-descriptions-item label="security">
+              加密密钥（必选），必须与 Proxy Anything Client 配置的密钥保持一致
+            </el-descriptions-item>
+          </el-descriptions>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -255,5 +352,27 @@ async function copyKey() {
 
 .keygen-result {
   max-width: 500px;
+}
+
+.config-docs {
+  margin-top: 24px;
+}
+
+.config-example {
+  margin-bottom: 20px;
+}
+
+.config-example pre {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  border-radius: 6px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.config-example code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 </style>
