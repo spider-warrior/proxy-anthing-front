@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
 
 type OsType = 'windows' | 'linux'
 
@@ -14,6 +15,29 @@ const clientDownloadLinks: Record<OsType, string> = {
 const serverDownloadLinks: Record<OsType, string> = {
   windows: 'https://github.com/spider-warrior/proxy-anything-artifact/releases/download/1.0.0/proxy-anything-server.exe',
   linux: 'https://github.com/spider-warrior/proxy-anything-artifact/releases/download/1.0.0/proxy-anything-server',
+}
+
+// AES 密钥生成
+type AesKeySize = 128 | 192 | 256
+const aesKeySize = ref<AesKeySize>(128)
+const generatedKey = ref('')
+
+function generateAesKey() {
+  const byteLength = aesKeySize.value / 8
+  const randomBytes = new Uint8Array(byteLength)
+  crypto.getRandomValues(randomBytes)
+  // 转为 Base64 编码，Java 端使用 Base64.getDecoder().decode() 还原
+  generatedKey.value = btoa(String.fromCharCode(...randomBytes))
+}
+
+async function copyKey() {
+  if (!generatedKey.value) return
+  try {
+    await navigator.clipboard.writeText(generatedKey.value)
+    ElMessage.success('已复制到剪贴板')
+  } catch {
+    ElMessage.error('复制失败，请手动复制')
+  }
 }
 </script>
 
@@ -98,6 +122,33 @@ const serverDownloadLinks: Record<OsType, string> = {
         </div>
       </el-col>
     </el-row>
+
+    <!-- AES 密钥生成 -->
+    <div class="keygen-card">
+      <h2 class="card-title">AES 加密密钥生成</h2>
+      <p class="card-desc">
+        将生成的密钥分别配置到客户端和服务端的配置文件中即可启用加密通信。
+      </p>
+
+      <div class="keygen-row">
+        <el-select v-model="aesKeySize" size="large" style="width: 150px">
+          <el-option :label="'AES-128'" :value="128" />
+          <el-option :label="'AES-192'" :value="192" />
+          <el-option :label="'AES-256'" :value="256" />
+        </el-select>
+        <el-button type="primary" size="large" @click="generateAesKey">
+          生成密钥
+        </el-button>
+      </div>
+
+      <div v-if="generatedKey" class="keygen-result">
+        <el-input :model-value="generatedKey" readonly size="large">
+          <template #append>
+            <el-button @click="copyKey">复制</el-button>
+          </template>
+        </el-input>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -185,5 +236,24 @@ const serverDownloadLinks: Record<OsType, string> = {
 
 .btn-group .el-button {
   width: fit-content;
+}
+
+.keygen-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 32px;
+  margin-top: 24px;
+}
+
+.keygen-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.keygen-result {
+  max-width: 500px;
 }
 </style>
