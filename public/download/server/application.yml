@@ -6,4 +6,5 @@ application:
               bind-port: 44381
               server-host: 127.0.0.1
               server-port: 44382
+              protocol: "tcp"
               security: vXAZJmQdgXrgkE72anmldRRf8Tue6seDg62jp/VR9SA=
