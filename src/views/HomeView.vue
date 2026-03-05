@@ -7,13 +7,13 @@ const clientOs = ref<OsType>('windows')
 const serverOs = ref<OsType>('windows')
 
 const clientDownloadLinks: Record<OsType, string> = {
-  windows: '#',
-  linux: '#',
+  windows: 'https://github.com/spider-warrior/proxy-anything-artifact/releases/download/1.0.0/proxy-anything-client.exe',
+  linux: 'https://github.com/spider-warrior/proxy-anything-artifact/releases/download/1.0.0/proxy-anything-client',
 }
 
 const serverDownloadLinks: Record<OsType, string> = {
-  windows: '#',
-  linux: '#',
+  windows: 'https://github.com/spider-warrior/proxy-anything-artifact/releases/download/1.0.0/proxy-anything-server.exe',
+  linux: 'https://github.com/spider-warrior/proxy-anything-artifact/releases/download/1.0.0/proxy-anything-server',
 }
 </script>
 
@@ -52,7 +52,7 @@ const serverDownloadLinks: Record<OsType, string> = {
                 下载客户端
               </el-button>
             </div>
-            <el-button size="large" tag="a" href="#">
+            <el-button size="large" tag="a" href="/download/client/application.yml" download>
               下载配置
             </el-button>
           </div>
@@ -91,7 +91,7 @@ const serverDownloadLinks: Record<OsType, string> = {
                 下载服务端
               </el-button>
             </div>
-            <el-button size="large" tag="a" href="#">
+            <el-button size="large" tag="a" href="/download/server/application.yml" download>
               下载配置
             </el-button>
           </div>

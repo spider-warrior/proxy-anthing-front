@@ -1,0 +1,9 @@
+application:
+    setting:
+        proxy-server:
+            instance-list:
+            - bind-host: 0.0.0.0
+              bind-port: 44381
+              server-host: 127.0.0.1
+              server-port: 44382
+              security: gEIZCLU+48tkSknFfuE9kBCuKyhOrwnt54mJ3KX+uWE=
