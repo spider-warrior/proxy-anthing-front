@@ -29,6 +29,10 @@ async function handleLogin() {
   loading.value = true
   try {
     const res = await loginApi(form.username, form.password)
+    if (res.code !== '200') {
+      ElMessage.error(res.msg || '登录失败')
+      return
+    }
     userStore.setLogin(res.data.token, res.data.user)
     ElMessage.success('登录成功')
     router.push('/')
