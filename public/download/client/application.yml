@@ -8,8 +8,10 @@ application:
                 server-host: 127.0.0.1
                 server-port: 44381
                 protocol: "tcp"
+                security: vXAZJmQdgXrgkE72anmldRRf8Tue6seDg62jp/VR9SA=
               - bind-host: 0.0.0.0
                 bind-port: 44380
                 server-host: 127.0.0.1
                 server-port: 44381
                 protocol: "udp"
+                security: vXAZJmQdgXrgkE72anmldRRf8Tue6seDg62jp/VR9SA=
