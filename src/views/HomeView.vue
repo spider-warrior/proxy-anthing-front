@@ -25,11 +25,22 @@ const serverDownloadLinks: Record<OsType, string> = {
         <div class="product-card">
           <h2 class="card-title">Proxy Anything Client</h2>
           <p class="card-desc">
-            Proxy Anything Client 是一款功能强大的跨平台代理客户端，支持 Windows 和 Linux
-            系统。它提供了对 HTTP、HTTPS、SOCKS5 等多种代理协议的全面支持，让您可以根据需求灵活选择。
-            客户端采用直观的图形化界面设计，即使是初次使用也能轻松上手。内置的智能路由规则引擎支持按域名、
-            IP 段、地理位置等条件自动分流，配合高效的连接池管理和流量压缩技术，为您提供稳定流畅的代理体验。
+            Proxy Anything Client 是一款轻量、易用的跨平台代理客户端，帮助您快速接入代理服务。
           </p>
+
+          <ul class="feature-list">
+            <li><span class="feature-label">多平台支持</span>同时提供 Windows 和 Linux 版本，覆盖主流操作系统</li>
+            <li><span class="feature-label">加密 / 非加密通道</span>支持加密与非加密两种模式，加密通信需配合 Proxy Anything Server 实现</li>
+            <li><span class="feature-label">TCP &amp; UDP 协议</span>全面支持 TCP 和 UDP 协议转发，满足多样化的网络代理场景</li>
+          </ul>
+
+          <el-alert
+            type="warning"
+            :closable="false"
+            show-icon
+            title="配置文件需要与应用程序放在同一目录下，客户端启动时会自动读取。"
+            class="config-tip"
+          />
 
           <div class="btn-group">
             <div class="download-row">
@@ -53,11 +64,22 @@ const serverDownloadLinks: Record<OsType, string> = {
         <div class="product-card">
           <h2 class="card-title">Proxy Anything Server</h2>
           <p class="card-desc">
-            Proxy Anything Server 是一款高性能的代理服务端程序，专为生产环境设计。它采用异步 I/O
-            架构，能够高效处理大量并发连接，轻松应对高流量场景。服务端内置完善的用户认证体系，支持多用户管理
-            和精细的权限控制。实时流量统计功能帮助您全面掌握代理使用情况。支持 Docker 一键部署，
-            配合详细的日志监控和健康检查机制，让运维管理变得简单高效，是搭建私有代理服务的理想选择。
+            Proxy Anything Server 是一款高性能的代理服务端程序，帮助您快速搭建私有代理服务。
           </p>
+
+          <ul class="feature-list">
+            <li><span class="feature-label">多平台支持</span>同时提供 Windows 和 Linux 版本，覆盖主流操作系统</li>
+            <li><span class="feature-label">加密通道</span>作为加密通信的服务端，配合 Proxy Anything Client 实现加密数据传输</li>
+            <li><span class="feature-label">TCP &amp; UDP 协议</span>全面支持 TCP 和 UDP 协议转发，满足多样化的网络代理场景</li>
+          </ul>
+
+          <el-alert
+            type="warning"
+            :closable="false"
+            show-icon
+            title="配置文件需要与应用程序放在同一目录下，服务端启动时会自动读取。"
+            class="config-tip"
+          />
 
           <div class="btn-group">
             <div class="download-row">
@@ -102,6 +124,50 @@ const serverDownloadLinks: Record<OsType, string> = {
   font-size: 14px;
   line-height: 1.8;
   color: #666;
+  margin-bottom: 20px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature-list li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  padding-left: 16px;
+  position: relative;
+}
+
+.feature-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+}
+
+.feature-label {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-right: 8px;
+}
+
+.feature-label::after {
+  content: '—';
+  margin-left: 8px;
+  color: #ccc;
+}
+
+.config-tip {
   margin-bottom: 24px;
 }
 
